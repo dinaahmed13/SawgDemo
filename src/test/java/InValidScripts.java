@@ -48,13 +48,13 @@ public class InValidScripts {
 
     @Test(dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)
     public void inValidCheckoutWithNoData(String Username, String Password){
-        driver.findElement(By.id("user-name")).sendKeys(Username);
-        driver.findElement(By.id("password")).sendKeys(Password);
-        driver.findElement(By.id("login-button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("shopping_cart_link"))).click();
-        driver.findElement(By.xpath("//button[text()='Checkout']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("continue"))).click();
-      Assert.assertTrue(driver.findElement(By.xpath("//h3[@data-test='error']")).isDisplayed());
+        loginPage.enterUserName(Username);
+        loginPage.enterPassword(Password);
+        loginPage.enterLoginButton();
+        cartPage.enterShoppingCartLink();
+        cartPage.clickOnCheckoutButton();
+        checkoutPage.enterContinueButton();
+       Assert.assertTrue(checkoutPage.getErrorH3().isDisplayed());
     }
 
     @Test(dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)

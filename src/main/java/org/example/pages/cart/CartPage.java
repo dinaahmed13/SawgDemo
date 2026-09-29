@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class CartPage extends BasePage {
     private final By shoppingCartLink=By.className("shopping_cart_link");
-
+    private final By checkoutButton=By.id("checkout");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -19,6 +19,10 @@ public class CartPage extends BasePage {
     public void enterShoppingCartLink(){
          getShoppingCartLink().click();
     }
+    public void clickOnCheckoutButton(){
+        findElement(checkoutButton).click();
+    }
+
 
 
 }
