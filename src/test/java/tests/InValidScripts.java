@@ -1,40 +1,31 @@
+package tests;
+
+import base.BaseTest;
 import org.example.pages.Checkout.CheckoutPage;
 import org.example.pages.cart.CartPage;
 import org.example.pages.login.LoginPage;
 import org.example.pages.product.ProductPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class InValidScripts {
-    WebDriver driver;
-    WebDriverWait wait;
+public class InValidScripts extends BaseTest {
     LoginPage loginPage;
     ProductPage productPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
 
-    @BeforeClass
-    public void setUp(){
-        ChromeOptions chromeOptions =new ChromeOptions();
-        chromeOptions.addArguments("--incognito");
-        driver=new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-        driver.manage().window().maximize();
+
+
+
+    @Test(dataProvider = "credentials",dataProviderClass = DataProvidorTest.class)
+    public void inValidCartCheckout(String Username, String Password){
         loginPage=new LoginPage(driver);
         productPage = new ProductPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage= new CheckoutPage(driver);
-    }
 
-
-    @Test(dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)
-    public void inValidCartCheckout(String Username, String Password){
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
         loginPage.enterLoginButton();

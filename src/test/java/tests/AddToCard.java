@@ -1,40 +1,24 @@
+package tests;
+
+import base.BaseTest;
 import org.example.pages.Checkout.CheckoutPage;
 import org.example.pages.cart.CartPage;
 import org.example.pages.login.LoginPage;
 import org.example.pages.product.ProductPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class AddToCard{
-    WebDriver driver;
-    SoftAssert softAssert;
+public class AddToCard extends BaseTest {
     LoginPage loginPage;
     ProductPage productPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
 
-    @BeforeTest
-    public void setUp(){
-        ChromeOptions chromeOptions =new ChromeOptions();
-        chromeOptions.addArguments("--incognito");
-        driver=new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-        driver.manage().window().maximize();
-        softAssert = new SoftAssert();
-        loginPage=new LoginPage(driver);
-        productPage = new ProductPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage= new CheckoutPage(driver);
-    }
+
+
 
     /*
 
@@ -47,8 +31,14 @@ public class AddToCard{
 
     * */
 
-    @Test(dataProvider = "credentialsChekOut",dataProviderClass =DataProvidorTest.class)
+    @Test(dataProvider = "credentialsChekOut",dataProviderClass = DataProvidorTest.class)
     public void validAddToCard(String Username, String Password,String Firstname,String Lastname,String PostalCode){
+
+        loginPage=new LoginPage(driver);
+        productPage = new ProductPage(driver);
+        cartPage = new CartPage(driver);
+        checkoutPage= new CheckoutPage(driver);
+
 
 
         loginPage.enterUserName(Username);
@@ -69,7 +59,7 @@ public class AddToCard{
 
     }
 
-    @Test(priority=1,dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)
+    @Test(priority=1,dataProvider = "credentials",dataProviderClass = DataProvidorTest.class)
     public void multipleValidAddToCart(String Username, String Password){
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
