@@ -1,3 +1,7 @@
+import org.example.pages.Checkout.CheckoutPage;
+import org.example.pages.cart.CartPage;
+import org.example.pages.login.LoginPage;
+import org.example.pages.product.ProductPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +17,10 @@ import java.util.List;
 public class AddToCard{
     WebDriver driver;
     SoftAssert softAssert;
+    LoginPage loginPage;
+    ProductPage productPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
 
     @BeforeTest
     public void setUp(){
@@ -22,59 +30,58 @@ public class AddToCard{
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
         softAssert = new SoftAssert();
+        loginPage=new LoginPage(driver);
+        productPage = new ProductPage(driver);
+        cartPage = new CartPage(driver);
+        checkoutPage= new CheckoutPage(driver);
     }
 
-    @Test
-    public void validAddToCard(){
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.xpath("//div[text()='Sauce Labs Backpack']")).click();
-        driver.findElement(By.xpath("//button[text()='Add to cart']")).click();
-        driver.findElement(By.className("shopping_cart_link")).click();
-        driver.findElement(By.xpath("//button[text()='Checkout']")).click();
-        driver.findElement(By.id("first-name")).sendKeys("dina");
-        driver.findElement(By.id("last-name")).sendKeys("ahmed");
-        driver.findElement(By.id("postal-code")).sendKeys("11111");
-        driver.findElement(By.id("continue")).click();
-        driver.findElement(By.xpath("//button[text()='Finish']")).click();
-        String header = driver.findElement(By.className("complete-header")).getText();
+    /*
 
+
+        loginPage.enterUserName(Username);
+        loginPage.enterPassword(Password);
+        loginPage.enterLoginButton();
+
+        String title=productPage.enterTitle();
+
+    * */
+
+    @Test(dataProvider = "credentialsChekOut",dataProviderClass =DataProvidorTest.class)
+    public void validAddToCard(String Username, String Password,String Firstname,String Lastname,String PostalCode){
+
+
+        loginPage.enterUserName(Username);
+        loginPage.enterPassword(Password);
+        loginPage.enterLoginButton();
+        productPage.clickSauceLabsBackpackProduct();
+        productPage.clickOfAddToCart();
+        cartPage.clickShoppingCartLink();
+        cartPage.clickOnCheckoutButton();
+        checkoutPage.enterFirstName(Firstname);
+        checkoutPage.enterLastName(Lastname);
+        checkoutPage.enterPostalCode(PostalCode);
+        checkoutPage.enterContinueButton();
+        checkoutPage.clickCheckoutFinishButton();
+        String header = checkoutPage.getTextCompleteHeader();
         Assert.assertEquals(header, "Thank you for your order!");
 
 
     }
-    @Test(priority=1)
-    public void multipleValidAddToCart(){
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-        List<String> produtsName=List.of("jacket","t-shirt","backpack");
-        List<WebElement> products = driver.findElements(
-                By.xpath("//button[contains(text(),'Add to cart')]")
-        );
-        int count=0;
-        for(String produtName:produtsName){
-            for(WebElement product:products){
-                String productID= product.getAttribute("id");
-                if(productID.contains(produtName)){
-                    product.click();
-                    count++;
-                    break;
-                }
-            }
-        }
-        int cartCount = Integer.parseInt(
-                driver.findElement(By.className("shopping_cart_badge")).getText()
-        );
 
-        softAssert.assertEquals(cartCount, count);
+    @Test(priority=1,dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)
+    public void multipleValidAddToCart(String Username, String Password){
+        loginPage.enterUserName(Username);
+        loginPage.enterPassword(Password);
+        loginPage.enterLoginButton();
+        List<String> productsName=List.of("jacket","t-shirt","backpack");
+        List<WebElement> products =productPage.getAddToCartButtons();
+        List<Integer> countAndCountCar= cartPage.multipleAddToCart(productsName,products);
+        softAssert.assertEquals(countAndCountCar.get(1), countAndCountCar.get(0));
+        cartPage.clickShoppingCartLink();
 
-        driver.findElement(By.className("shopping_cart_link")).click();
-        List<WebElement> productsInCart = driver.findElements(
-                By.xpath("//button[contains(text(),'Remove')]")
-        );
+        List<WebElement> productsInCart = productPage.getAddRemoveButtons();
         System.out.println("==========="+productsInCart.size());
-        driver.close();
+
     }
 }

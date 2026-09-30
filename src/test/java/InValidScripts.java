@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.time.Duration;
-
 public class InValidScripts {
     WebDriver driver;
     WebDriverWait wait;
@@ -40,7 +38,7 @@ public class InValidScripts {
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
         loginPage.enterLoginButton();
-        cartPage.enterShoppingCartLink();
+        cartPage.clickShoppingCartLink();
         checkoutPage.enterCheckoutButton();
         String header = checkoutPage.enterCheckoutSpan();
         Assert.assertEquals(header, "Checkout: Your Information");
@@ -51,7 +49,7 @@ public class InValidScripts {
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
         loginPage.enterLoginButton();
-        cartPage.enterShoppingCartLink();
+        cartPage.clickShoppingCartLink();
         cartPage.clickOnCheckoutButton();
         checkoutPage.enterContinueButton();
        Assert.assertTrue(checkoutPage.getErrorH3().isDisplayed());
@@ -62,12 +60,14 @@ public class InValidScripts {
         driver.findElement(By.id("user-name")).sendKeys(Username);
         driver.findElement(By.id("password")).sendKeys(Password);
         driver.findElement(By.id("login-button")).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Sauce Labs Backpack']"))).click();
         driver.findElement(By.className("shopping_cart_link")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Checkout']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first-name"))).sendKeys("dina");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("continue"))).click();
         Assert.assertTrue(driver.findElement(By.xpath("//h3[@data-test='error']")).isDisplayed());
+
     }
 
     @Test(dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)

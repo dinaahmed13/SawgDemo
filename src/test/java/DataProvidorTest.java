@@ -11,11 +11,18 @@ public class DataProvidorTest {
 
     @DataProvider(name = "credentialsInValid")
     public Object[][] getDataINValid() {
-        return new Object[][] {
+        return new Object[][]{
                 {"", ""},
                 {"standard_use", "secret_saue"}
 
         };
+    }
+
+        @DataProvider(name = "credentialsChekOut")
+        public Object[][] getDataOfCheckOut() {
+            return new Object[][] {
+                    {"standard_user","secret_sauce", "dina", "ahmed","11111"}
+            };
     }
 
 
