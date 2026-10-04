@@ -1,5 +1,7 @@
 package org.example.pages.cart;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class CartPage extends BasePage {
+    Logger log = LogManager.getLogger(CartPage.class);
     private final By shoppingCartLink=By.className("shopping_cart_link");
     private final By checkoutButton=By.id("checkout");
 
@@ -15,13 +18,16 @@ public class CartPage extends BasePage {
         super(driver);
     }
     public WebElement getShoppingCartLink() {
+        log.info("Getting Shopping Cart Link");
         return findElement(shoppingCartLink);
     }
 
     public void clickShoppingCartLink(){
+        log.info("Click Shopping Cart Link");
          getShoppingCartLink().click();
     }
     public void clickOnCheckoutButton(){
+        log.info("Click Checkout Button");
         findElement(checkoutButton).click();
     }
 

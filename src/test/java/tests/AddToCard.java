@@ -43,7 +43,7 @@ public class AddToCard extends BaseTest {
 
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
-        loginPage.enterLoginButton();
+        loginPage.clickLoginButton();
         productPage.clickSauceLabsBackpackProduct();
         productPage.clickOfAddToCart();
         cartPage.clickShoppingCartLink();
@@ -51,7 +51,7 @@ public class AddToCard extends BaseTest {
         checkoutPage.enterFirstName(Firstname);
         checkoutPage.enterLastName(Lastname);
         checkoutPage.enterPostalCode(PostalCode);
-        checkoutPage.enterContinueButton();
+        checkoutPage.clickContinueButton();
         checkoutPage.clickCheckoutFinishButton();
         String header = checkoutPage.getTextCompleteHeader();
         Assert.assertEquals(header, "Thank you for your order!");
@@ -63,7 +63,7 @@ public class AddToCard extends BaseTest {
     public void multipleValidAddToCart(String Username, String Password){
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
-        loginPage.enterLoginButton();
+        loginPage.clickLoginButton();
         List<String> productsName=List.of("jacket","t-shirt","backpack");
         List<WebElement> products =productPage.getAddToCartButtons();
         List<Integer> countAndCountCar= cartPage.multipleAddToCart(productsName,products);

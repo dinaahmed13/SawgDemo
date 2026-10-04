@@ -28,21 +28,25 @@ public class InValidScripts extends BaseTest {
 
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
-        loginPage.enterLoginButton();
+        loginPage.clickLoginButton();
         cartPage.clickShoppingCartLink();
-        checkoutPage.enterCheckoutButton();
+        checkoutPage.clickCheckoutButton();
         String header = checkoutPage.enterCheckoutSpan();
         Assert.assertEquals(header, "Checkout: Your Information");
     }
 
     @Test(dataProvider = "credentials",dataProviderClass =DataProvidorTest.class)
     public void inValidCheckoutWithNoData(String Username, String Password){
+//        loginPage=new LoginPage(driver);
+//        cartPage = new CartPage(driver);
+//        checkoutPage= new CheckoutPage(driver);
+
         loginPage.enterUserName(Username);
         loginPage.enterPassword(Password);
-        loginPage.enterLoginButton();
+        loginPage.clickLoginButton();
         cartPage.clickShoppingCartLink();
         cartPage.clickOnCheckoutButton();
-        checkoutPage.enterContinueButton();
+        checkoutPage.clickContinueButton();
        Assert.assertTrue(checkoutPage.getErrorH3().isDisplayed());
     }
 

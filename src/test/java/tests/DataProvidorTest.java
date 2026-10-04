@@ -12,7 +12,7 @@ public class DataProvidorTest {
     }
 
     @DataProvider(name = "credentialsInValid")
-    public Object[][] getDataINValid() {
+    public Object[][] getDataInValid() {
         return new Object[][]{
                 {"", ""},
                 {"standard_use", "secret_saue"}
