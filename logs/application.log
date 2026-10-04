@@ -1,0 +1,35 @@
+2026-10-04 12:36:18 INFO  LoginPage:22 - Getting username field
+2026-10-04 12:36:18 DEBUG LoginPage:38 - Enter username standard_user
+2026-10-04 12:36:18 INFO  LoginPage:27 - Getting password field
+2026-10-04 12:36:18 DEBUG LoginPage:42 - Enter password secret_sauce
+2026-10-04 12:36:18 INFO  LoginPage:45 - Click Login Button
+2026-10-04 12:36:18 INFO  LoginPage:32 - Getting login button
+2026-10-04 14:18:17 INFO  LoginPage:22 - Getting username field
+2026-10-04 14:18:17 DEBUG LoginPage:38 - Enter username standard_user
+2026-10-04 14:18:17 INFO  LoginPage:27 - Getting password field
+2026-10-04 14:18:17 DEBUG LoginPage:42 - Enter password secret_sauce
+2026-10-04 14:18:17 INFO  LoginPage:45 - Click Login Button
+2026-10-04 14:18:17 INFO  LoginPage:32 - Getting login button
+2026-10-04 14:20:06 INFO  LoginPage:22 - Getting username field
+2026-10-04 14:20:06 DEBUG LoginPage:38 - Enter username standard_user
+2026-10-04 14:20:06 INFO  LoginPage:27 - Getting password field
+2026-10-04 14:20:06 DEBUG LoginPage:42 - Enter password secret_sauce
+2026-10-04 14:20:06 INFO  LoginPage:45 - Click Login Button
+2026-10-04 14:20:06 INFO  LoginPage:32 - Getting login button
+2026-10-04 14:20:07 INFO  CartPage:26 - Click Shopping Cart Link
+2026-10-04 14:20:07 INFO  CartPage:21 - Getting Shopping Cart Link
+2026-10-04 14:20:07 INFO  CheckoutPage:33 - Click Checkout Button
+2026-10-04 14:20:08 INFO  CheckoutPage:42 - Getting Checkout Span
+2026-10-04 14:20:10 INFO  LoginPage:22 - Getting username field
+2026-10-04 14:28:01 INFO  LoginPage:22 - Getting username field
+2026-10-04 14:28:01 DEBUG LoginPage:38 - Enter username standard_user
+2026-10-04 14:28:01 INFO  LoginPage:27 - Getting password field
+2026-10-04 14:28:01 DEBUG LoginPage:42 - Enter password secret_sauce
+2026-10-04 14:28:01 INFO  LoginPage:45 - Click Login Button
+2026-10-04 14:28:01 INFO  LoginPage:32 - Getting login button
+2026-10-04 14:28:01 INFO  CartPage:26 - Click Shopping Cart Link
+2026-10-04 14:28:01 INFO  CartPage:21 - Getting Shopping Cart Link
+2026-10-04 14:28:02 INFO  CartPage:30 - Click Checkout Button
+2026-10-04 14:28:02 INFO  CheckoutPage:52 - Click Continue Button
+2026-10-04 14:28:02 INFO  CheckoutPage:47 - Getting Continue Button
+2026-10-04 14:28:02 INFO  CheckoutPage:56 - Getting Error H3
